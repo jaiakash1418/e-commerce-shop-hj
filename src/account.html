@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <!-- Include header component -->
+        <div id="header"></div>
+    </header>
+
+    <div class="container mt-5">
+        <h2>User Account Management</h2>
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Account</button>
+        </form>
+    </div>
+
+    <footer>
+        <!-- Include footer component -->
+        <div id="footer"></div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load header and footer components
+        document.getElementById('header').innerHTML = '<!-- Header content goes here -->';
+        document.getElementById('footer').innerHTML = '<!-- Footer content goes here -->';
+    </script>
+</body>
+
+</html>
