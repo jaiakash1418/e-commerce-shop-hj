@@ -153,3 +153,251 @@ textarea {
         text-align: left;
     }
 }
+
+/* Damped Menu Styles */
+.site-header {
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.damped-menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.menu-item {
+    position: relative;
+    padding: 15px 0;
+}
+
+.menu-link {
+    color: #0438e4;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Roboto', sans-serif;
+
+    padding: 10px 15px;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.menu-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #007bff;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Damped animation */
+    transform: translateX(-50%);
+}
+
+.menu-link:hover {
+    color: #282829;
+}
+
+.menu-link:hover::after {
+    width: 100%;
+}
+
+/* Active state */
+.menu-item.active .menu-link {
+    color: #007bff;
+}
+
+.menu-item.active .menu-link::after {
+    width: 100%;
+}
+
+/* Enhanced Damped Menu Styles */
+.site-header {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.site-header:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.menu-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 123, 255, 0.1);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.9s ease;
+}
+
+/* Active state with page-specific colors */
+.menu-item.active .menu-link {
+    color: #007bff;
+    font-weight: 500;
+}
+
+/* Fade effect for menu items */
+.menu-item {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.menu-item:hover {
+    opacity: 1;
+}
+
+.menu-item.active {
+    opacity: 1;
+}
+
+/* Fancy Dropdown Menu */
+.fancy-dropdown {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 1000;
+}
+
+.dropdown-trigger {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.dropdown-button {
+    background: #007bff;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Hover state */
+.fancy-dropdown:hover .dropdown-button {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+
+.fancy-dropdown:hover .animated-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fancy-dropdown:hover .dropdown-button:after {
+    transform: rotate(180deg);
+}
+
+/* Menu animation */
+.animated-menu {
+    position: absolute;
+    top: 45px;
+    left: -120px;
+    width: 273px;
+    height: 222px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Menu contents */
+.menu-contents {
+    position: relative;
+    left: 20px;
+    top: 48px;
+    width: 234px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fancy-dropdown:hover .menu-contents {
+    opacity: 1;
+}
+
+.menu-row {
+    padding: 12px 20px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-row:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+.menu-row:last-child {
+    border-radius: 0 0 8px 8px;
+    border-bottom: none;
+}
+
+.menu-row:hover {
+    background: #f8f9fa;
+    color: #007bff;
+    padding-left: 25px;
+}
+
+/* Remove click toggle */
+.menu-expanded .dropdown-button:after,
+.menu-expanded .menu-shadow,
+.menu-expanded .menu-contents {
+    transform: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .fancy-dropdown {
+        top: 10px;
+        left: 10px;
+        position: fixed;
+    }
+
+    .animated-menu {
+        left: 0;
+    }
+
+    .menu-contents {
+        width: 200px;
+    }
+
+    /* Damped menu mobile layout */
+    .menu-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+
+    .menu-item {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -96,3 +96,18 @@ document.addEventListener('click', (e) => {
         e.target.closest('.navbar-toggler').classList.toggle('active');
     }
 });
+
+// Get current page path
+const currentPage = window.location.pathname.split('/').pop();
+    
+// Remove all active classes first
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.classList.remove('active');
+});
+
+// Add active class to current page's menu item
+document.querySelectorAll('.menu-link').forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+        link.parentElement.classList.add('active');
+    }
+});
