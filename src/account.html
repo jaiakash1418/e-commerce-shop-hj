@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="account-page">
+    <script>
+        if (!localStorage.getItem('accessToken')) {
+            window.location.href = '/login.html';
+        }
+    </script>
+
+    <nav class="damped-menu">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="index.html" class="menu-link">Home</a></li>
+            <li class="menu-item"><a href="products.html" class="menu-link">Products</a></li>
+            <li class="menu-item"><a href="cart.html" class="menu-link">Cart</a></li>
+            <li class="menu-item"><a href="account.html" class="menu-link">Account</a></li>
+            <li class="menu-item"><a href="login.html" class="menu-link">Login</a></li>
+        </ul>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group" id="account-nav" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#profile"
+                        role="tab">
+                        <i class="fas fa-user-circle mr-2"></i>Profile
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#addresses" role="tab">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Addresses
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#security" role="tab">
+                        <i class="fas fa-shield-alt mr-2"></i>Change Password
+                    </a>
+                    <a class="list-group-item list-group-item-action text-danger" href="#" onclick="logout()">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <!-- Profile Section -->
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                        <h3>My Profile</h3>
+                        <hr>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Enter your username"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email"
+                                    required readonly>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <!-- Addresses Section -->
+                    <div class="tab-pane fade" id="addresses" role="tabpanel">
+                        <h3>My Addresses</h3>
+                        <hr>
+                        <div id="address-list">
+                            <!-- Addresses will be loaded here -->
+                        </div>
+                        <button class="btn btn-success mt-3" id="add-address-btn">
+                            <i class="fas fa-plus mr-1"></i> Add New Address
+                        </button>
+                        <form id="address-form" class="mt-3 p-3 border rounded" style="display: none;">
+                            <h5>New Address</h5>
+                            <div class="form-group">
+                                <label>Full Address</label>
+                                <textarea class="form-control" id="full-address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Postal Code</label>
+                                <input type="text" class="form-control" id="postal-code" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Address</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-address-btn">Cancel</button>
+                        </form>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="tab-pane fade" id="security" role="tabpanel">
+                        <h3>Change Password</h3>
+                        <hr>
+                        <form id="password-form">
+                            <div class="form-group">
+                                <label for="current-password">Current Password</label>
+                                <input type="password" class="form-control" id="current-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" class="form-control" id="new-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirm-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <!-- Footer will be loaded by main.js -->
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module">
+        // Account page specific logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const addAddressBtn = document.getElementById('add-address-btn');
+            const addressForm = document.getElementById('address-form');
+            const cancelAddressBtn = document.getElementById('cancel-address-btn');
+
+            addAddressBtn.addEventListener('click', () => {
+                addressForm.style.display = 'block';
+                addAddressBtn.style.display = 'none';
+            });
+
+            cancelAddressBtn.addEventListener('click', () => {
+                addressForm.style.display = 'none';
+                addAddressBtn.style.display = 'block';
+                addressForm.reset();
+            });
+
+            // Add form submission handlers here
+            // e.g., document.getElementById('password-form').addEventListener('submit', ...);
+        });
+    </script>
+</body>
+
+</html>

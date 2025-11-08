@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body class="cart-page">
+    <nav class="damped-menu">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="index.html" class="menu-link">Home</a></li>
+            <li class="menu-item"><a href="products.html" class="menu-link">Products</a></li>
+            <li class="menu-item"><a href="cart.html" class="menu-link">Cart</a></li>
+            <li class="menu-item"><a href="account.html" class="menu-link">Account</a></li>
+            <li class="menu-item"><a href="login.html" class="menu-link">Login</a></li>
+        </ul>
+    </nav>
+    <main class="container mt-5">
+        <h1>Your Shopping Cart</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between">
+            <h3 id="cart-total">Total: $0.00</h3>
+            <button class="btn btn-primary" id="checkout-button">Checkout</button>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Include footer component -->
+        <div id="footer"></div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script type="module">
+        import auth from './js/auth.js';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if user is admin
+            const isAdmin = localStorage.getItem('adminAccess') === 'true';
+            if (isAdmin) {
+                auth.addCartAdminControls();
+            }
+
+            // Function to load cart items
+            function loadCartItems() {
+                // Logic to fetch and display cart items
+            }
+
+            // Function to calculate total
+            function calculateTotal() {
+                // Logic to calculate total price
+            }
+
+            // Event listener for checkout button
+            document.getElementById('checkout-button').addEventListener('click', function () {
+                // Logic for checkout process
+            });
+
+            // Initial load
+            loadCartItems();
+            calculateTotal();
+        });
+    </script>
+</body>
+
+</html>

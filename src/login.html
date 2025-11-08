@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tamil E-Commerce Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        #register-form {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="damped-menu">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="index.html" class="menu-link">Home</a></li>
+            <li class="menu-item"><a href="products.html" class="menu-link">Products</a></li>
+            <li class="menu-item"><a href="cart.html" class="menu-link">Cart</a></li>
+            <li class="menu-item"><a href="account.html" class="menu-link">Account</a></li>
+            <li class="menu-item"><a href="login.html" class="menu-link">Login</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <div class="login-container">
+            <h2 class="text-center mb-4">Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <p class="text-center mt-3">
+                Don't have an account? <a href="#" id="show-register">Register here</a>
+            </p>
+
+            <form id="register-form">
+                <h2 class="text-center mb-4">Register</h2>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="register-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+    <!-- Add type="module" to scripts that use import/export -->
+    <script type="module" src="js/auth-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module">
+        import auth from './js/auth.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const showRegisterLink = document.getElementById('show-register');
+
+            showRegisterLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            });
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+
+                try {
+                    const user = await auth.login(email, password);
+                    if (user.role === 'admin') {
+                        window.location.href = '/admin.html';
+                    } else {
+                        window.location.href = '/products.html';
+                    }
+                } catch (error) {
+                    alert('Login failed');
+                }
+            });
+
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('register-email').value;
+                const password = doc
+                ument.getElementById('register-password').value;
+
+                try {
+                    await auth.register(email, password);
+                    alert('Registration successful! Please login.');
+                    loginForm.style.display = 'block';
+                    registerForm.style.display = 'none';
+                } catch (error) {
+                    alert('Registration failed: ' + error.message);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

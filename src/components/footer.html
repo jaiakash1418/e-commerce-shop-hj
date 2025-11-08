@@ -1,0 +1,37 @@
+<footer class="site-footer bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <a href="index.html" class="d-flex align-items-center text-white font-weight-bold mb-2">
+                    <img src="images/logo-white.png" alt="logo" style="height:28px;margin-right:8px;">
+                    <span>Tamil E-Commerce</span>
+                </a>
+                <p class="small mb-0">Your one-stop shop for Tamil products.</p>
+            </div>
+
+            <div class="col-6 col-md-3 mb-3 mb-md-0">
+                <h6 class="text-white">Quick links</h6>
+                <ul class="list-unstyled small">
+                    <li><a class="text-white" href="products.html">Products</a></li>
+                    <li><a class="text-white" href="cart.html">Cart</a></li>
+                    <li><a class="text-white" href="account.html">Account</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-3 text-md-right small">
+                <h6 class="text-white">Contact</h6>
+                <div>support@tamilstore.example</div>
+                <div>+91 12345 67890</div>
+            </div>
+        </div>
+
+        <hr class="bg-secondary my-3">
+
+        <div class="text-center small">&copy; <span id="year"></span> Tamil E-Commerce. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+    // render current year
+    try { document.getElementById('year').textContent = new Date().getFullYear(); } catch (e) {/*ignore*/ }
+</script>
